@@ -26,7 +26,7 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "roles")
-public class Role {
+public class RoleEntity {
 
     @Id
     @Column(name = "role_id")
@@ -38,17 +38,17 @@ public class Role {
     private RoleName name;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
+    private Set<UserEntity> users = new HashSet<>();
 
-    public void addUser(User user) {
+    public void addUser(UserEntity userEntity) {
         if (users == null) {
             users = new HashSet<>();
         }
 
-        users.add(user);
+        users.add(userEntity);
     }
 
-    public void removeUser(User user) {
-        users.remove(user);
+    public void removeUser(UserEntity userEntity) {
+        users.remove(userEntity);
     }
 }

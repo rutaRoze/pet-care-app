@@ -3,7 +3,7 @@ package com.roze.petcare.service.impl;
 import com.roze.petcare.mapper.UserMapper;
 import com.roze.petcare.model.response.UserResponse;
 import com.roze.petcare.persistance.UserRepository;
-import com.roze.petcare.persistance.model.User;
+import com.roze.petcare.persistance.model.UserEntity;
 import com.roze.petcare.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,11 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    public UserResponse getUserById(Long id) {
+    public UserResponse findUserById(Long id) {
 
-        User user = userRepository.findById(id)
+        UserEntity userEntity = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found by id: " + id));
 
-        return userMapper.userToUserResponse(user);
+        return userMapper.userEntityToUserResponse(userEntity);
     }
 }

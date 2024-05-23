@@ -23,7 +23,7 @@ public class UserController {
     public ResponseEntity<UserResponse> getUserById(
             @Min(1) @PathVariable Long id)
     {
-        UserResponse userResponse = userService.getUserById(id);
+        UserResponse userResponse = userService.findUserById(id);
 
         return ResponseEntity.ok(userResponse);
     }

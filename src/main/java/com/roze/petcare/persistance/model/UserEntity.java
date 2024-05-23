@@ -17,7 +17,7 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "users")
-public class User {
+public class UserEntity {
 
     @Id
     @Column(name = "user_id")
@@ -42,9 +42,9 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles = new HashSet<>();
+    private Set<RoleEntity> roles = new HashSet<>();
 
-    public void addRole(Role role) {
+    public void addRole(RoleEntity role) {
         if (roles == null) {
             roles = new HashSet<>();
         }
@@ -52,7 +52,7 @@ public class User {
         roles.add(role);
     }
 
-    public void removeRole(Role role) {
+    public void removeRole(RoleEntity role) {
         roles.remove(role);
     }
 }
