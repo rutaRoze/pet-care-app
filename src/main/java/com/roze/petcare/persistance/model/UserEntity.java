@@ -44,15 +44,52 @@ public class UserEntity {
     )
     private Set<RoleEntity> roles = new HashSet<>();
 
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private Set<AppointmentEntity> ownerAppointments = new HashSet<>();
+
+    @OneToMany(mappedBy = "vet", cascade = CascadeType.ALL)
+    private Set<AppointmentEntity> vetAppointments = new HashSet<>();
+
     public void addRole(RoleEntity role) {
         if (roles == null) {
             roles = new HashSet<>();
         }
-
         roles.add(role);
     }
 
     public void removeRole(RoleEntity role) {
-        roles.remove(role);
+        if (roles != null) {
+            roles.remove(role);
+        }
+    }
+
+    public void addAppointmentToOwner(AppointmentEntity appointment) {
+        if (ownerAppointments == null) {
+            ownerAppointments = new HashSet<>();
+        }
+        appointment.setOwner(this);
+        ownerAppointments.add(appointment);
+    }
+
+    public void removeAppointmentFromOwner(AppointmentEntity appointment) {
+        if (ownerAppointments != null) {
+            ownerAppointments.remove(appointment);
+            appointment.setOwner(null);
+        }
+    }
+
+    public void addAppointmentToVet(AppointmentEntity appointment) {
+        if (vetAppointments == null) {
+            vetAppointments = new HashSet<>();
+        }
+        appointment.setVet(this);
+        vetAppointments.add(appointment);
+    }
+
+    public void removeAppointmentFromVet(AppointmentEntity appointment) {
+        if (vetAppointments != null) {
+            vetAppointments.remove(appointment);
+            appointment.setVet(null);
+        }
     }
 }
