@@ -1,5 +1,6 @@
 package com.roze.petcare.service.impl;
 
+import com.roze.petcare.exception.AppointmentExistsException;
 import com.roze.petcare.exception.NoChangesMadeException;
 import com.roze.petcare.mapper.AppointmentMapper;
 import com.roze.petcare.model.request.AppointmentRequest;
@@ -23,6 +24,11 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public AppointmentResponse saveAppointment(AppointmentRequest appointmentRequest) {
         AppointmentEntity appointmentToSave = appointmentMapper.requestToEntity(appointmentRequest);
+
+        if(isAppointmentAlreadyExists(appointmentToSave)) {
+            throw new AppointmentExistsException("Appointment for given veterinarian, date and time already exists");
+        }
+
         AppointmentEntity savedAppointment = appointmentRepository.save(appointmentToSave);
 
         return appointmentMapper.entityToResponse(savedAppointment);
@@ -74,5 +80,12 @@ public class AppointmentServiceImpl implements AppointmentService {
                 existingAppointment.getVet().getId().equals(appointmentRequest.getVetId()) &&
                 existingAppointment.getAppointmentDateTime().equals(appointmentRequest.getAppointmentDateTime()) &&
                 existingAppointment.getReason().equals(appointmentRequest.getReason());
+    }
+
+    private boolean isAppointmentAlreadyExists(AppointmentEntity appointmentToSave) {
+        return appointmentRepository.existsByVetIdAndAppointmentDateTime(
+                appointmentToSave.getVet().getId(),
+                appointmentToSave.getAppointmentDateTime()
+        );
     }
 }
