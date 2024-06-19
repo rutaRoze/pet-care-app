@@ -34,7 +34,7 @@ public class RoleEntity {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private RoleName name;
 
     @ManyToMany(mappedBy = "roles")
@@ -50,5 +50,6 @@ public class RoleEntity {
 
     public void removeUser(UserEntity userEntity) {
         users.remove(userEntity);
+        userEntity.getRoles().remove(this);
     }
 }
