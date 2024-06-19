@@ -55,11 +55,13 @@ public class UserEntity {
             roles = new HashSet<>();
         }
         roles.add(role);
+        role.getUsers().add(this);
     }
 
     public void removeRole(RoleEntity role) {
         if (roles != null) {
             roles.remove(role);
+            role.getUsers().remove(this);
         }
     }
 
