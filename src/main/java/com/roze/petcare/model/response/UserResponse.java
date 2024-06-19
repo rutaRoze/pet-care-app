@@ -3,12 +3,12 @@ package com.roze.petcare.model.response;
 import com.roze.petcare.enums.RoleName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
-@Getter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
