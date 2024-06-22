@@ -13,6 +13,7 @@ import com.roze.petcare.service.RoleService;
 import com.roze.petcare.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +32,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public UserResponse saveUser(UserRequest userRequest) {
 
@@ -41,7 +45,8 @@ public class UserServiceImpl implements UserService {
         UserEntity userToSave = userMapper.userRequestToUserEntity(userRequest);
 
         userToSave.setName(sanitizeData(userRequest.getName()));
-        userToSave.setName(sanitizeData(userRequest.getSurname()));
+        userToSave.setSurname(sanitizeData(userRequest.getSurname()));
+        userToSave.setPassword(passwordEncoder.encode(sanitizeData(userRequest.getPassword())));
         userToSave.setRoles(roleService.getRoleEntitiesFormRoleNames(userRequest.getRoleNames()));
 
         UserEntity savedUser = userRepository.save(userToSave);

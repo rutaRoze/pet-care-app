@@ -33,10 +33,13 @@ public class UserEntity {
     @Column(name = "email", unique = true)
     private String email;
 
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

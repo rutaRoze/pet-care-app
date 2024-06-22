@@ -31,6 +31,12 @@ public class UserRequest {
     private String email;
 
     @NotBlank
+    @Size(min = 8, max = 30)
+    @Pattern(regexp = "^(?!.*\\s)(?=.*[A-Z])(?=.*\\d)(?=.*[a-z])(?=.*[!@#$%^&*()]).+$",
+            message = "Invalid password format. Please provide a valid password.")
+    private String password;
+
+    @NotBlank
     @Size(min = 2, max = 20)
     @Pattern(regexp = "^\\+\\d+$", message = "Invalid phone format. Please provide a valid phone number.")
     private String phoneNumber;

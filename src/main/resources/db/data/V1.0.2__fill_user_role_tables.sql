@@ -1,14 +1,14 @@
 USE petcaredb;
 
-INSERT INTO users (name, surname, email, phone_number)
+INSERT INTO users (name, surname, email, password, phone_number)
 VALUES
-    ('John', 'Doe', 'john@example.com', '1234567890'),
-    ('Jane', 'Dodo', 'jane@example.com', '1234567890'),
-    ('Alice', 'Done', 'alice@example.com', '1234567890'),
-    ('Bob', 'Din', 'bob@example.com', '1234567890'),
-    ('Emily', 'Dave', 'emily@example.com', '1234567890'),
-    ('David', 'Did', 'david@example.com', '1234567890'),
-    ('Sarah', 'Dada', 'sarah@example.com', '1234567890');
+    ('John', 'Doe', 'john@example.com', "pass1", '1234567890'),
+    ('Jane', 'Dodo', 'jane@example.com', "pass1", '1234567890'),
+    ('Alice', 'Done', 'alice@example.com', "pass1", '1234567890'),
+    ('Bob', 'Din', 'bob@example.com', "pass1", '1234567890'),
+    ('Emily', 'Dave', 'emily@example.com', "pass1", '1234567890'),
+    ('David', 'Did', 'david@example.com', "pass1", '1234567890'),
+    ('Sarah', 'Dada', 'sarah@example.com', "pass1", '1234567890');
 
 INSERT INTO roles (name)
 VALUES
