@@ -29,7 +29,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping()
-    public ResponseEntity<UserResponse> createAppointment(
+    public ResponseEntity<UserResponse> createUser(
             @Valid @RequestBody UserRequest userRequest) {
         UserResponse userResponse = userService.saveUser(userRequest);
 
@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> updateAppointmentById(
+    public ResponseEntity<UserResponse> updateUserById(
             @Min(1) @PathVariable Long id,
             @Valid @RequestBody UserRequest userRequest) {
         UserResponse userResponse = userService.updateUserById(id, userRequest);
@@ -61,7 +61,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteAppointmentById(
+    public ResponseEntity<String> deleteUserById(
             @Min(1) @PathVariable Long id) {
         userService.deleteUserById(id);
 
