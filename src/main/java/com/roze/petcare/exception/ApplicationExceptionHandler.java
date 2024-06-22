@@ -54,6 +54,11 @@ public class ApplicationExceptionHandler {
         return buildResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Object> handle(IllegalArgumentException ex) {
+        return buildResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
     private ResponseEntity<Object> buildResponse(String message, HttpStatus status) {
         return new ResponseEntity<>(message, status);
     }
